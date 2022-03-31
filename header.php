@@ -10,3 +10,4 @@
 <body>
     <div class="main">
         <h1> Mo's todo list </h1>
+        <table style="width: 100%">
