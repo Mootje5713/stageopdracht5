@@ -1,37 +1,52 @@
     <?php
     include "header.php"; 
     session_start();
+
+//<table>
+    //<tr><th>Taak</th><th>Acties</th></tr>
+    //foreach
+        //<tr><td class="deleted">beschrijving</td><td><?php if():>ene acties<?php else >andere acties<?php end ></td></tr>
+    //endforeach;
+//</table>
+echo "<table style=width: 100%>";
     if (isset($_SESSION) && isset($_SESSION['todo'])) {
-        foreach ($_SESSION['todo'] as $key => $value) {
-            if ($value['deleted']) echo "<s>";
-            echo "<th>Taak</th>";
-            echo "<td>" . 'Taak:' . '&nbsp' . $value['taak'] . '<br>';
-            echo 'start-datum:' . '&nbsp' . $value['start-datum'] . '<br>';
-            echo 'eind-datum:' . '&nbsp' . $value['eind-datum'] . '<br>' . "</td>";
-            ?>
-            <?php
-            if ($value['deleted']) echo "</s>";
-                if (!$value['deleted']) {
-                    ?>
-                    <th>Acties</th>
-                    <td> 
-                    <button onclick="window.location.href='softdelete.php?id=<?php echo $key; ?>'">Verwijder</button>
-                    <button onclick="window.location.href='update.php?id=<?php echo $key; ?>'">Wijzigen</button>
-                    </td>
-                    <?php
-                } else {
-                    ?>
-                    <th>Acties</th>
-                    <td>
-                    <button onclick="window.location.href='restore.php?id=<?php echo $key; ?>'">Herstel</button>
-                    <button onclick="window.location.href='delete.php?id=<?php echo $key; ?>'">Definitief Verwijderen</button>
-                    </td>
-                    <?php
-                }
+        echo "<tr>
+        <th>Taak</th>
+        <th>start-datum</th>
+        <th>eind-datum</th>
+        <th>Acties</th>
+        </tr>";
+        foreach ($_SESSION['todo'] as $key => $value):
+            if ($value['deleted']) $class = 'deleted';
+            else $class = '';
+            echo "<td class='$class'>";
+            echo $value['taak'] . '<br>' . "</td>";
+            echo "<td class='$class'>";
+            echo $value['start-datum'] . '<br>' . "</td>";
+            echo "<td class='$class'>";
+            echo $value['eind-datum'] . '<br>' . "</td>";
+            if (!$value['deleted']) {
+                
                 ?>
-                <br>
-            <?php 
+                <td>
+                <button onclick="window.location.href='softdelete.php?id=<?php echo $key; ?>'">Verwijder</button>
+                <button onclick="window.location.href='update.php?id=<?php echo $key; ?>'">Wijzigen</button>
+                </td>
+                <?php
+            } else {
+                ?>
+                <td>
+                <button onclick="window.location.href='restore.php?id=<?php echo $key; ?>'">Herstel</button>
+                <button onclick="window.location.href='delete.php?id=<?php echo $key; ?>'">Definitief Verwijderen</button>
+                </td>
+                <?php
             }
-        }   
-    ?>
-    <?php include "footer.php"; ?>
+            ?>
+                </tr>
+            <?php 
+        endforeach;
+    }
+echo "</table>";?>
+
+<?php include "footeractions.php"; ?>
+<?php include "footer.php"; ?>

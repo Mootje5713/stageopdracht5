@@ -1,7 +1,22 @@
-.main {margin: 2rem auto; width: 40rem;}
+.main {margin: 2rem auto; width: 30rem;}
 label {display: inline-block; min-width: 4rem;}
 input {margin-bottom: 0.5rem;}
 
-table, th, td {
+table {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+th, td {
     border:1px solid black;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(odd){background-color: lightgrey}
+
+
+.deleted {
+    text-decoration: line-through;
 }
