@@ -18,13 +18,13 @@ if (isset($_POST['taak']) && isset($_POST['start-datum']) && isset($_POST['eind-
 <?php include "header.php" ?>
 <form method="POST">
     <label for="taak">taak</label>
-    <input type="text" name="taak">
+    <input type="text" name="taak" required>
     <br>
     <label for="start-datum">start-datum</label>
-    <input type="date" name="start-datum">
+    <input type="date" name="start-datum" required>
     <br>
     <label for="eind-datum">eind-datum</label>
-    <input type="date" name="eind-datum">
+    <input type="date" name="eind-datum" required>
     <br>
     <input type="submit" value="Toevoegen">
 </form>

@@ -1,6 +1,6 @@
-    <?php
-    include "header.php"; 
-    session_start();
+<?php
+include "header.php"; 
+session_start();
 
 //<table>
     //<tr><th>Taak</th><th>Acties</th></tr>
@@ -10,23 +10,24 @@
 //</table>
 echo "<table style=width: 100%>";
     if (isset($_SESSION) && isset($_SESSION['todo'])) {
-        echo "<tr>
-        <th>Taak</th>
-        <th>start-datum</th>
-        <th>eind-datum</th>
-        <th>Acties</th>
-        </tr>";
+        if (isset($_SESSION['todo']) && count($_SESSION['todo'])) {
+            echo "<tr>
+            <th>Taak</th>
+            <th>Start-datum</th>
+            <th>Eind-datum</th>
+            <th>Acties</th>
+            </tr>";
+        }
         foreach ($_SESSION['todo'] as $key => $value):
             if ($value['deleted']) $class = 'deleted';
             else $class = '';
-            echo "<td class='$class'>";
-            echo $value['taak'] . '<br>' . "</td>";
-            echo "<td class='$class'>";
-            echo $value['start-datum'] . '<br>' . "</td>";
-            echo "<td class='$class'>";
-            echo $value['eind-datum'] . '<br>' . "</td>";
+                echo "<td class='$class'>";
+                echo $value['taak'] . '<br>' . "</td>";
+                echo "<td class='$class'>";
+                echo $value['start-datum'] . '<br>' . "</td>";
+                echo "<td class='$class'>";
+                echo $value['eind-datum'] . '<br>' . "</td>";
             if (!$value['deleted']) {
-                
                 ?>
                 <td>
                 <button onclick="window.location.href='softdelete.php?id=<?php echo $key; ?>'">Verwijder</button>
@@ -37,7 +38,7 @@ echo "<table style=width: 100%>";
                 ?>
                 <td>
                 <button onclick="window.location.href='restore.php?id=<?php echo $key; ?>'">Herstel</button>
-                <button onclick="window.location.href='delete.php?id=<?php echo $key; ?>'">Definitief Verwijderen</button>
+                <button onclick="if(confirm('Weet je het zeker'))window.location.href='delete.php?id=<?php echo $key; ?>'">Definitief Verwijderen</button>
                 </td>
                 <?php
             }
